@@ -4,8 +4,9 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import com.valu.uitaycompose.utils.tayTextSemiBold
 import com.valu.uitaycompose.utils.tay_blue_700
-import com.valu.uitaycompose.utils.tay_grey_200
-import com.valu.uitaycompose.utils.*
+import com.valu.uitaycompose.utils.tay_blue_900
+import com.valu.uitaycompose.utils.tay_grey_400
+import com.valu.uitaycompose.utils.tay_grey_700
 
 
 data class UiTayButtonModel (

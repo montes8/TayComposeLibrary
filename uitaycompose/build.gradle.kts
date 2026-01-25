@@ -40,4 +40,6 @@ dependencies {
     implementation(libs.androidx.appcompat)
     implementation("androidx.compose.ui:ui:1.10.0")
     implementation("androidx.compose.material3:material3:1.4.0")
+    implementation("io.ktor:ktor-client-okhttp:3.1.1")
+    implementation("io.ktor:ktor-client-cio:3.1.1")
 }
