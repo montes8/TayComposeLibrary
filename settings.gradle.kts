@@ -21,4 +21,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "TayComposeLibrary"
 include(":app")
- 
+include(":uitaycompose")

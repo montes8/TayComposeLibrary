@@ -4,44 +4,52 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import com.valu.taycomposelibrary.ui.theme.TayComposeLibraryTheme
+import com.valu.uitaycompose.UiTayButton
+import com.valu.uitaycompose.model.UTStyleCButton
 
 class MainActivity : ComponentActivity() {
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
             TayComposeLibraryTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding)
-                    )
+                    Screençhome()
                 }
             }
         }
     }
 }
 
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
 
-@Preview(showBackground = true)
 @Composable
-fun GreetingPreview() {
-    TayComposeLibraryTheme {
-        Greeting("Android")
+fun Screençhome(){
+    var selected by remember { mutableStateOf(false)}
+    Column(modifier = Modifier.padding(top=250.dp, start = 16.dp, end = 16.dp),
+        verticalArrangement = Arrangement.spacedBy(36.dp)) {
+        UiTayButton(uiTayEnable = true){
+
+        }
+
+        UiTayButton(uiTayEnable = true,uiTayStyleBtn = UTStyleCButton.UI_TAY_SECONDARY, colorDefaultIcon = true){
+
+        }
     }
 }
