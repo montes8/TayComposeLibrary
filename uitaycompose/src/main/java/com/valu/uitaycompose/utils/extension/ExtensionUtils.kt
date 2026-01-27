@@ -16,3 +16,17 @@ fun Modifier.uiTayNoRippleClickable(
         onClick()
     }
 )
+
+
+fun uiTayDriveUrl(originalUrl: String): String {
+    if (!originalUrl.contains("drive.google.com")) return originalUrl
+    val idPattern = "/d/([^/]+)".toRegex()
+    val match = idPattern.find(originalUrl)
+    val id = match?.groupValues?.get(1)
+
+    return if (id != null) {
+        "https://drive.google.com/uc?export=view&id=$id"
+    } else {
+        originalUrl
+    }
+}

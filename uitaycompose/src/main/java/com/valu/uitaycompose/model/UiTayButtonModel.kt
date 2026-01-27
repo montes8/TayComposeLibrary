@@ -2,11 +2,12 @@ package com.valu.uitaycompose.model
 
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
-import com.valu.uitaycompose.utils.tayTextSemiBold
 import com.valu.uitaycompose.utils.tay_blue_700
 import com.valu.uitaycompose.utils.tay_blue_900
 import com.valu.uitaycompose.utils.tay_grey_400
 import com.valu.uitaycompose.utils.tay_grey_700
+import com.valu.uitaycompose.utils.textB16
+import com.valu.uitaycompose.utils.textM16
 
 
 data class UiTayButtonModel (
@@ -29,7 +30,7 @@ data class UiTayButtonModel (
     var uTTextColorSecondary: Color = tay_blue_700,
     var uTTextColorDisableSecondary: Color = tay_grey_700,
     var uTTextColorSelectedSecondary: Color =  tay_blue_900,
-    var uTTextFont : TextStyle = tayTextSemiBold.bodyMedium,
+    var uTTextFont : TextStyle = textB16,
     var uTColorIconDefault: Boolean = false,
     var uTIconStart : Int? = null,
     var uTIconEnd : Int? = null,

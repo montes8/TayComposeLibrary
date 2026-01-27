@@ -1,5 +1,6 @@
 package com.valu.uitaycompose.swipe
 
+import android.annotation.SuppressLint
 import android.view.View
 import android.view.ViewGroup
 import android.webkit.WebChromeClient
@@ -15,22 +16,9 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidView
 
+@SuppressLint("SetJavaScriptEnabled")
 @Composable
-fun UiTayMovieDrive(id: String,height: Dp = 200.dp) {
-    val videoHtml = """
-        <html>
-            <body style="margin:0;padding:0;background-color:black;">
-                <iframe 
-                    src="https://drive.google.com/file/d/$id/preview" 
-                    width="100%" 
-                    height="100%" 
-                    frameborder="0" 
-                    allow="autoplay; encrypted-media" 
-                    allowfullscreen>
-                </iframe>
-            </body>
-        </html>
-    """.trimIndent()
+fun UiTayMovieDrive(movieHtml: String,height: Dp = 200.dp) {
     AndroidView(
         factory = { context ->
             WebView(context).apply {
@@ -52,7 +40,7 @@ fun UiTayMovieDrive(id: String,height: Dp = 200.dp) {
 
                 loadDataWithBaseURL(
                     "https://drive.google.com",
-                    videoHtml,
+                    movieHtml,
                     "text/html",
                     "UTF-8",
                     null
