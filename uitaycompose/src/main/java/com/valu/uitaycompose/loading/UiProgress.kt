@@ -26,24 +26,26 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
+import com.valu.uitaycompose.utils.tay_blue_600
+import com.valu.uitaycompose.utils.tay_grey_200
 import kotlin.time.Duration
 
 fun Modifier.uiShowProgress(
     show: Boolean
 ): Modifier = composed {
     if (show) {
-        UiProgressAlter()
+        UiProgress()
     }
     this
 }
 
 @Composable
-fun UiProgressAlter(
+fun UiProgress(
     duration: Int = 600,
     line: Dp = 4.dp,
     size: Dp = 40.dp,
-    colorProgress: Color = Color.Magenta,
-    bgProgress: Color = Color.Transparent,
+    colorProgress: Color = tay_blue_600,
+    bgProgress: Color = tay_grey_200,
     backgroundColor: Color = Color.Black.copy(alpha = 0.5f)
 ) {
     Dialog(
@@ -74,11 +76,11 @@ fun UiProgressAlter(
 
 @Composable
 fun DualColorFastProgress(
-    speedMillis: Int = 600,
-    color1: Color = Color.Red,
-    color2: Color = Color.Blue,
-    strokeWidth: Dp = 4.dp,
-    size: Dp = 40.dp
+    speedMillis: Int,
+    color1: Color ,
+    color2: Color ,
+    strokeWidth: Dp,
+    size: Dp
 ) {
     val transition = rememberInfiniteTransition(label = "rotation")
 
