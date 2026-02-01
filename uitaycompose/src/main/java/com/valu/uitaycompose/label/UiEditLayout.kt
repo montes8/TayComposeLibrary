@@ -29,7 +29,7 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import com.valu.uitaycompose.R
-import com.valu.uitaycompose.model.UiTayEditLayoutModel
+import com.valu.uitaycompose.model.UiEditLayoutModel
 import com.valu.uitaycompose.utils.UI_EMPTY
 
 @Composable
@@ -48,7 +48,7 @@ fun UiTayEditLayout(
     endIcon: Int? = null,
     onIconClick: (() -> Unit)? = null,
     isError: Boolean = false,
-    model: UiTayEditLayoutModel = UiTayEditLayoutModel()
+    model: UiEditLayoutModel = UiEditLayoutModel()
 ) {
     var passwordVisible by remember { mutableStateOf(false) }
     var active by remember { mutableStateOf(false) }

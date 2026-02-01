@@ -39,7 +39,7 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import com.valu.uitaycompose.R
-import com.valu.uitaycompose.model.UiTayEditBasicModel
+import com.valu.uitaycompose.model.UiEditBasicModel
 import com.valu.uitaycompose.utils.UI_EMPTY
 
 @Suppress("UNUSED_VALUE")
@@ -64,7 +64,7 @@ fun UiTayEditBasic(
     onIconEndClick: (() -> Unit)? = null,
     isPassword: Boolean = false,
     isError: Boolean = false,
-    model: UiTayEditBasicModel = UiTayEditBasicModel()
+    model: UiEditBasicModel = UiEditBasicModel()
 ) {
     var passwordVisible by remember { mutableStateOf(!isPassword) }
     var active by remember { mutableStateOf(false) }

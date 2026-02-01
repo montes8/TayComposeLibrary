@@ -3,7 +3,7 @@ import androidx.compose.ui.graphics.Color
 import com.valu.uitaycompose.utils.*
 
 
-class UiTaySwitchModel (
+class UiSwitchModel (
     var uTWidth : Int = 60,
     var uTHeight : Int = 30,
     var uTRadiusCtn : Int = 30,

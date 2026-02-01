@@ -7,7 +7,6 @@ import com.valu.uitaycompose.utils.tay_blue_900
 import com.valu.uitaycompose.utils.tay_grey_400
 import com.valu.uitaycompose.utils.tay_grey_700
 import com.valu.uitaycompose.utils.textB16
-import com.valu.uitaycompose.utils.textM16
 
 
 data class UiTayButtonModel (

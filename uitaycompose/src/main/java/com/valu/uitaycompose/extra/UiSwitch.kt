@@ -20,12 +20,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
-import com.valu.uitaycompose.model.UiTaySwitchModel
+import com.valu.uitaycompose.model.UiSwitchModel
 import com.valu.uitaycompose.utils.extension.uiTayNoRippleClickable
 
 @Composable
 fun UiTaySwitch(state : Boolean = false,
-                uTModel : UiTaySwitchModel = UiTaySwitchModel(),
+                uTModel : UiSwitchModel = UiSwitchModel(),
                 uiTayCheckedChange: (Boolean) -> Unit = {}){
     var isChecked by remember { mutableStateOf(state) }
     Row(

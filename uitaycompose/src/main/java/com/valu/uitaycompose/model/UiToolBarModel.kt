@@ -7,7 +7,7 @@ import com.valu.uitaycompose.R
 import com.valu.uitaycompose.utils.tay_blue_700
 import com.valu.uitaycompose.utils.textGabbiB20
 
-data class UiTayToolBarModel (
+data class UiToolBarModel (
     var uiHeight : Int = 56,
     var uiBgColor : Color = tay_blue_700,
     var uiTextColor: Color = Color.White,

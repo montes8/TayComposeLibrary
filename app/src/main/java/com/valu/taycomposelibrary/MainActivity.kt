@@ -13,12 +13,17 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.valu.taycomposelibrary.ui.theme.TayComposeLibraryTheme
+import com.valu.uitaycompose.button.UiTayButton
 import com.valu.uitaycompose.label.UiTayEditBasic
 import com.valu.uitaycompose.label.UiTayEditLayout
+import com.valu.uitaycompose.loading.uiShowProgress
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 class MainActivity : ComponentActivity() {
 
@@ -39,13 +44,17 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun Screençhome(){
-    var text by remember { mutableStateOf("") }
-    Column(modifier = Modifier.padding(top=250.dp, start = 16.dp, end = 16.dp),
+    var showMyModal by remember { mutableStateOf(false) }
+    val scope = rememberCoroutineScope()
+    Column(modifier = Modifier.padding(top=250.dp, start = 16.dp, end = 16.dp)
+        .uiShowProgress(showMyModal),
         verticalArrangement = Arrangement.spacedBy(36.dp)) {
-        UiTayEditLayout(
-            value = text,
-            onValueChange = { text = it },
-            hint = "Nombre de usuario"
-        )
+        UiTayButton() {
+            showMyModal = true
+            scope.launch {
+                delay(3000)
+                showMyModal = false
+            }
+        }
     }
 }

@@ -7,7 +7,7 @@ import androidx.compose.ui.unit.dp
 import com.valu.uitaycompose.R
 import com.valu.uitaycompose.utils.*
 
-data class UiTayEditBasicModel (
+data class UiEditLayoutModel (
     var uiBgColor : Color = Color.White,
     var uiBgDisableColor : Color = Color.White,
     var uiBgActiveColor : Color = Color.White,
@@ -33,7 +33,5 @@ data class UiTayEditBasicModel (
     var uiIconMarginEnd : Dp = 8.dp,
     var uiTextFont : TextStyle = textM16,
     var uiTitleFont : TextStyle = textM14,
-    var uiMessageFont : TextStyle = textS12,
-    var uiTypeStart : Boolean = true,
-    var uiTypeEnd : Boolean = true
+    var uiMessageFont : TextStyle = textS12
 )

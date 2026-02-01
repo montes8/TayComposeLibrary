@@ -36,7 +36,7 @@ import kotlinx.coroutines.launch
 
 @Composable
 fun UiTayButton(uiTayText : String = UI_TAY_TEXT_DEFAULT,
-                uiTayEnable : Boolean = false,
+                uiTayEnable : Boolean = true,
                 uiTayStyleBtn : UTStyleCButton = UTStyleCButton.UI_TAY_PRIMARY,
                 uiTayStyleIcon : UTStyleIcon = UTStyleIcon.FULL,
                 uiTayBtnModel : UiTayButtonModel = UiTayButtonModel(),

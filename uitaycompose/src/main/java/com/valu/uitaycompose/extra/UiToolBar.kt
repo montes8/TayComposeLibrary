@@ -13,12 +13,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
-import com.valu.uitaycompose.model.UiTayToolBarModel
+import com.valu.uitaycompose.model.UiToolBarModel
 import com.valu.uitaycompose.utils.UI_TAY_TEXT_DEFAULT
 
 @Composable
 fun UiTayCToolBar(uiTayText : String = UI_TAY_TEXT_DEFAULT,
-                  uiTayModifier : UiTayToolBarModel = UiTayToolBarModel(),
+                  uiTayModifier : UiToolBarModel = UiToolBarModel(),
                   uiTayClick: (Boolean) -> Unit = {}
 ) {
     Box (modifier = Modifier.height(uiTayModifier.uiHeight.dp).background(uiTayModifier.uiBgColor)
