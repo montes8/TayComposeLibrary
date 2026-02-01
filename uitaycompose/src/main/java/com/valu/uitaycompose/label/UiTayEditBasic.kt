@@ -21,6 +21,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
+import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -41,6 +42,7 @@ import com.valu.uitaycompose.R
 import com.valu.uitaycompose.model.UiTayEditBasicModel
 import com.valu.uitaycompose.utils.UI_EMPTY
 
+@Suppress("UNUSED_VALUE")
 @Composable
 fun UiTayEditBasic(
     modifier: Modifier = Modifier,
@@ -61,8 +63,8 @@ fun UiTayEditBasic(
     onIconStartClick: (() -> Unit)? = null,
     onIconEndClick: (() -> Unit)? = null,
     isPassword: Boolean = false,
-    isError : Boolean = false,
-    model : UiTayEditBasicModel = UiTayEditBasicModel()
+    isError: Boolean = false,
+    model: UiTayEditBasicModel = UiTayEditBasicModel()
 ) {
     var passwordVisible by remember { mutableStateOf(!isPassword) }
     var active by remember { mutableStateOf(false) }
@@ -86,43 +88,65 @@ fun UiTayEditBasic(
         }
     }
 
-    val titleColor = when {
-        active -> model.uiTitleActiveColor
-        enabled -> model.uiTitleColor
-        else -> model.uiTitleDisableColor
+    val titleColor by remember(active, enabled) {
+        derivedStateOf {
+            when {
+                active -> model.uiTitleActiveColor
+                enabled -> model.uiTitleColor
+                isError -> model.uiMessageColor
+                else -> model.uiTitleDisableColor
+            }
+        }
+    }
+    val textColor by remember(active, enabled) {
+        derivedStateOf {
+            when {
+                active -> model.uiTextActiveColor
+                enabled -> model.uiTextColor
+                else -> model.uiTextDisableColor
+            }
+        }
     }
 
-    val textColor = when {
-        active -> model.uiTextActiveColor
-        enabled -> model.uiTextColor
-        else -> model.uiTextDisableColor
+    val iconColor by remember(active, enabled) {
+        derivedStateOf {
+            when {
+                active -> model.uiIconActiveColor
+                enabled -> model.uiIconColor
+                isError -> model.uiMessageColor
+                else -> model.uiIconDisableColor
+            }
+        }
     }
 
-    val iconColor = when {
-        active -> model.uiIconActiveColor
-        enabled -> model.uiIconColor
-        else -> model.uiIconDisableColor
+    val bgColor by remember(active, enabled) {
+        derivedStateOf {
+            when {
+                active -> model.uiBgActiveColor
+                enabled -> model.uiBgColor
+                else -> model.uiBgDisableColor
+            }
+        }
     }
 
-    val bgColor = when {
-        active -> model.uiBgActiveColor
-        enabled -> model.uiBgColor
-        else -> model.uiBgDisableColor
-    }
-
-    val strokeColor = when {
-        active -> model.uiStrokeActiveColor
-        enabled -> model.uiStrokeColor
-        else -> model.uiStrokeDisableColor
+    val strokeColor by remember(active, enabled) {
+        derivedStateOf {
+            when {
+                active -> model.uiStrokeActiveColor
+                enabled -> model.uiStrokeColor
+                isError -> model.uiMessageColor
+                else -> model.uiStrokeDisableColor
+            }
+        }
     }
 
     Column(modifier = modifier.fillMaxWidth()) {
         if (title.isNotEmpty()) {
             Text(
-                    text = title,
-                    color = titleColor,
-                     style = model.uiTitleFont
-                )
+                text = title,
+                color = titleColor,
+                style = model.uiTitleFont
+            )
             Spacer(modifier = Modifier.height(8.dp))
         }
 
@@ -130,7 +154,7 @@ fun UiTayEditBasic(
             value = value,
             onValueChange = {
                 if (it.length <= maxLength) onValueChange(it)
-            },modifier = Modifier
+            }, modifier = Modifier
                 .fillMaxWidth()
                 .onFocusChanged { focusState ->
                     active = focusState.isFocused
@@ -154,7 +178,10 @@ fun UiTayEditBasic(
                             color = strokeColor,
                             shape = RoundedCornerShape(28.dp)
                         )
-                        .padding(horizontal = model.uiPaddingHorizontal, vertical = model.uiPaddingVertical),
+                        .padding(
+                            horizontal = model.uiPaddingHorizontal,
+                            vertical = model.uiPaddingVertical
+                        ),
                     verticalAlignment = Alignment.CenterVertically
                 ) {
 
@@ -174,7 +201,8 @@ fun UiTayEditBasic(
 
                     Box(modifier = Modifier.weight(1f)) {
                         if (value.isEmpty()) {
-                            Text(text = hint, color = model.uiHintColor,
+                            Text(
+                                text = hint, color = model.uiHintColor,
                                 style = model.uiTextFont
                             )
                         }

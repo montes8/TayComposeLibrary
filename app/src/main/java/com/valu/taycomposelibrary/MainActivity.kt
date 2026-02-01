@@ -18,6 +18,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.valu.taycomposelibrary.ui.theme.TayComposeLibraryTheme
 import com.valu.uitaycompose.label.UiTayEditBasic
+import com.valu.uitaycompose.label.UiTayEditLayout
 
 class MainActivity : ComponentActivity() {
 
@@ -41,12 +42,10 @@ fun Screençhome(){
     var text by remember { mutableStateOf("") }
     Column(modifier = Modifier.padding(top=250.dp, start = 16.dp, end = 16.dp),
         verticalArrangement = Arrangement.spacedBy(36.dp)) {
-        UiTayEditBasic(
+        UiTayEditLayout(
             value = text,
             onValueChange = { text = it },
-            title = "Nombre de usuario",
-            hint = "Escribe aquí...",
-            isPassword = true
+            hint = "Nombre de usuario"
         )
     }
 }
