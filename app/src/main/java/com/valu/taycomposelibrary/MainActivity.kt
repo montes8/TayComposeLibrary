@@ -7,10 +7,8 @@ import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -19,15 +17,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.valu.taycomposelibrary.ui.theme.TayComposeLibraryTheme
-import com.valu.taycomposelibrary.ui.theme.Typography
-import com.valu.uitaycompose.button.UiTayButton
-import com.valu.uitaycompose.extra.UiTayCToolBar
-import com.valu.uitaycompose.extra.UiTaySwitch
-import com.valu.uitaycompose.extra.UiTaySwitchCustom
-import com.valu.uitaycompose.model.UTStyleCButton
-import com.valu.uitaycompose.swipe.UiTayUrlImage
-import com.valu.uitaycompose.swipe.getDirectDrive
-import com.valu.uitaycompose.utils.textB14
+import com.valu.uitaycompose.label.UiTayEditBasic
 
 class MainActivity : ComponentActivity() {
 
@@ -37,7 +27,7 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             TayComposeLibraryTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
+                Scaffold(modifier = Modifier.fillMaxSize()) { _ ->
                     Screençhome()
                 }
             }
@@ -48,10 +38,15 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun Screençhome(){
-    var selected by remember { mutableStateOf(false) }
+    var text by remember { mutableStateOf("") }
     Column(modifier = Modifier.padding(top=250.dp, start = 16.dp, end = 16.dp),
         verticalArrangement = Arrangement.spacedBy(36.dp)) {
-        UiTayUrlImage(getDirectDrive("https://drive.google.com/file/d/1hp8ma3xqNWVq1LGnE9MOS1ndil7atKUS/view"),
-            modifier = Modifier.height(200.dp))
+        UiTayEditBasic(
+            value = text,
+            onValueChange = { text = it },
+            title = "Nombre de usuario",
+            hint = "Escribe aquí...",
+            isPassword = true
+        )
     }
 }
