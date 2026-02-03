@@ -1,6 +1,7 @@
 package com.valu.taycomposelibrary
 
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
@@ -19,9 +20,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.valu.taycomposelibrary.ui.theme.TayComposeLibraryTheme
 import com.valu.uitaycompose.button.UiTayButton
-import com.valu.uitaycompose.label.UiTayEditBasic
-import com.valu.uitaycompose.label.UiTayEditLayout
 import com.valu.uitaycompose.loading.uiShowProgress
+import com.valu.uitaycompose.security.aes.AesECB
+import com.valu.uitaycompose.security.aes.TypeAes
+import com.valu.uitaycompose.security.aes.uiCreateSecretKeyStore
+import com.valu.uitaycompose.security.aes.uiKeyBase64ToString
+import com.valu.uitaycompose.security.aes.uiKeyHexToString
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
@@ -31,6 +35,34 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
+
+        // 1. Generamos una llave manual para las funciones que piden String
+        Log.d("TAG_ENCROIP","forma unoo -----------------------------------------\n")
+        val type =   TypeAes.ECB_256
+        val secretKeyManual = uiCreateSecretKeyStore(alias="mi_clave_test",type)
+        val textoOriginal = "¡Hola! Este es un mensaje secreto 123."
+        var textencrip = AesECB.encrypt(data = textoOriginal, key = secretKeyManual,type = type)
+
+       Log.d("TAG_ENCROIP",textencrip)
+
+        var textdes = AesECB.decrypt(dataBase64 = textencrip, key = secretKeyManual,type = type)
+        Log.d("TAG_ENCROIP",textdes)
+        Log.d("TAG_ENCROIP","forma dos -----------------------------------------\n")
+
+        var textencriptwo = AesECB.encryptAut(data = textoOriginal,type = type)
+
+        Log.d("TAG_ENCROIP",textencriptwo)
+        var textdestwo = AesECB.decryptAut(dataBase64 = textencriptwo,type = type)
+        Log.d("TAG_ENCROIP",textdestwo)
+        Log.d("TAG_ENCROIP","forma dos tress-----------------------------------------\n")
+        val secretstring = uiKeyBase64ToString(type)
+
+        var textencriptre = AesECB.encrypt(data = textoOriginal,key =secretstring,type = type)
+
+        Log.d("TAG_ENCROIP",textencriptre)
+        var textdestre = AesECB.decrypt(dataBase64 = textencriptre,key=secretstring,type = type)
+        Log.d("TAG_ENCROIP",textdestre)
+
         setContent {
             TayComposeLibraryTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { _ ->

@@ -1,14 +1,12 @@
-package com.valu.uitaycompose.security
+package com.valu.uitaycompose.security.biometric
 
 import androidx.appcompat.app.AppCompatActivity
 import androidx.biometric.BiometricManager
 import androidx.biometric.BiometricPrompt
 import androidx.core.content.ContextCompat
-import com.valu.uitaycompose.security.biometric.validateNewFinger
 import com.valu.uitaycompose.utils.UI_CANCEL_BIOMETRIC
 import com.valu.uitaycompose.utils.UI_SUB_TITLE_BIOMETRIC
 import com.valu.uitaycompose.utils.UI_TITLE_BIOMETRIC
-
 
 /** todo val authManager = remember {
     AuthenticationManager(activity) { result ->
