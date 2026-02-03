@@ -42,4 +42,5 @@ dependencies {
     implementation("androidx.compose.material3:material3:1.4.0")
     implementation("io.ktor:ktor-client-okhttp:3.1.1")
     implementation("io.ktor:ktor-client-cio:3.1.1")
+    implementation("androidx.biometric:biometric:1.2.0-alpha05")
 }
