@@ -1,4 +1,4 @@
-package com.valu.uitaycompose.security.aes
+package com.valu.uitaycompose.security.encryption
 
 import android.security.keystore.KeyGenParameterSpec
 import android.security.keystore.KeyProperties
@@ -7,7 +7,10 @@ import com.valu.uitaycompose.utils.UI_EMPTY
 import com.valu.uitaycompose.utils.UI_ERROR_KEY
 import com.valu.uitaycompose.utils.UI_ERROR_KEY_FORMAT
 import com.valu.uitaycompose.utils.UI_MY_KEY_SECRET
+import java.security.KeyPairGenerator
 import java.security.KeyStore
+import java.security.PrivateKey
+import java.security.PublicKey
 import javax.crypto.KeyGenerator
 import javax.crypto.SecretKey
 import java.security.SecureRandom
@@ -104,4 +107,45 @@ enum class TypeAes(
     GCM_128(128, KeyProperties.BLOCK_MODE_GCM, KeyProperties.ENCRYPTION_PADDING_NONE, "AES/GCM/NoPadding"),
     GCM_192(192, KeyProperties.BLOCK_MODE_GCM, KeyProperties.ENCRYPTION_PADDING_NONE, "AES/GCM/NoPadding"),
     GCM_256(256, KeyProperties.BLOCK_MODE_GCM, KeyProperties.ENCRYPTION_PADDING_NONE, "AES/GCM/NoPadding")
+}
+
+
+fun uiCreateRsaKeyPair(): Pair<String, String> {
+    val kpg = KeyPairGenerator.getInstance("RSA")
+    kpg.initialize(2048) // todo Safe standard size
+    val kp = kpg.generateKeyPair()
+    val publicKey = Base64.encodeToString(kp.public.encoded, Base64.NO_WRAP)
+    val privateKey = Base64.encodeToString(kp.private.encoded, Base64.NO_WRAP)
+    return Pair(publicKey, privateKey)
+}
+
+
+fun String.uiCreateRsaKeyStore() {
+    val keyStore = KeyStore.getInstance("AndroidKeyStore").apply { load(null) }
+    if (keyStore.containsAlias(this)) return
+    val kpg = KeyPairGenerator.getInstance(
+        KeyProperties.KEY_ALGORITHM_RSA,
+        "AndroidKeyStore"
+    )
+    val parameterSpec = KeyGenParameterSpec.Builder(
+        this,
+        KeyProperties.PURPOSE_ENCRYPT or KeyProperties.PURPOSE_DECRYPT
+    ).run {
+        setDigests(KeyProperties.DIGEST_SHA256, KeyProperties.DIGEST_SHA512)
+        setEncryptionPaddings(KeyProperties.ENCRYPTION_PADDING_RSA_PKCS1)
+        setKeySize(2048)
+        build()
+    }
+    kpg.initialize(parameterSpec)
+    kpg.generateKeyPair()
+}
+
+fun String.uiRsaPublicKeyStore(): PublicKey {
+    val keyStore = KeyStore.getInstance("AndroidKeyStore").apply { load(null) }
+    return keyStore.getCertificate(this).publicKey
+}
+
+fun String.uiRsaPrivateKeyStore(): PrivateKey {
+    val keyStore = KeyStore.getInstance("AndroidKeyStore").apply { load(null) }
+    return keyStore.getKey(this, null) as PrivateKey
 }

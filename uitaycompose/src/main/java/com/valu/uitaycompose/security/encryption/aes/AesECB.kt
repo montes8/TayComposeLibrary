@@ -1,6 +1,9 @@
-package com.valu.uitaycompose.security.aes
+package com.valu.uitaycompose.security.encryption.aes
 
 import android.util.Base64
+import com.valu.uitaycompose.security.encryption.TypeAes
+import com.valu.uitaycompose.security.encryption.uiConverterKeyString
+import com.valu.uitaycompose.security.encryption.uiCreateSecretKeyStore
 import com.valu.uitaycompose.utils.UI_MY_KEY_SECRET
 import javax.crypto.Cipher
 import javax.crypto.SecretKey
@@ -41,7 +44,7 @@ object AesECB {
         return String(decryptedBytes, Charsets.UTF_8)
     }
 
-    fun encryptAut(data: String, type: TypeAes,alias: String = UI_MY_KEY_SECRET): String {
+    fun encryptAut(data: String, type: TypeAes, alias: String = UI_MY_KEY_SECRET): String {
         val key = uiCreateSecretKeyStore(alias, type)
         val cipher = Cipher.getInstance(type.transformation)
 
@@ -51,7 +54,7 @@ object AesECB {
         return Base64.encodeToString(encrypted, Base64.NO_WRAP)
     }
 
-    fun decryptAut(dataBase64: String,  type: TypeAes,alias: String = UI_MY_KEY_SECRET): String {
+    fun decryptAut(dataBase64: String, type: TypeAes, alias: String = UI_MY_KEY_SECRET): String {
         val key = uiCreateSecretKeyStore(alias, type)
         val cipher = Cipher.getInstance(type.transformation)
         cipher.init(Cipher.DECRYPT_MODE, key)
