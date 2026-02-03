@@ -41,7 +41,6 @@ object AesECB {
         return String(decryptedBytes, Charsets.UTF_8)
     }
 
-
     fun encryptAut(data: String, type: TypeAes,alias: String = UI_MY_KEY_SECRET): String {
         val key = uiCreateSecretKeyStore(alias, type)
         val cipher = Cipher.getInstance(type.transformation)

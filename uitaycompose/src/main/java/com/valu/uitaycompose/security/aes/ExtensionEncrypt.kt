@@ -42,10 +42,10 @@ fun uiCreateSecretKey(type: TypeAes = TypeAes.GCM_256): SecretKey {
     keyGenerator.init(type.keySize) // todo 128, 192 o 256
     return keyGenerator.generateKey()
 }
-fun uiKeyHexToString(type: TypeAes = TypeAes.GCM_256): String {
+fun uiCreateKeyHexToString(type: TypeAes = TypeAes.GCM_256): String {
     return uiKeyToHex(uiCreateSecretKey(type))
 }
-fun uiKeyBase64ToString(type: TypeAes = TypeAes.GCM_256): String {
+fun uiCreateKeyBase64ToString(type: TypeAes = TypeAes.GCM_256): String {
     return uiKeyToBase64(uiCreateSecretKey(type))
 }
 
