@@ -59,5 +59,8 @@ dependencies {
     androidTestImplementation(libs.androidx.compose.ui.test.junit4)
     debugImplementation(libs.androidx.compose.ui.tooling)
     debugImplementation(libs.androidx.compose.ui.test.manifest)
+    implementation("org.bouncycastle:bcprov-jdk18on:1.77")
+    // Librería de utilidades y PKIX (necesaria para manejar pares de llaves)
+    implementation("org.bouncycastle:bcpkix-jdk18on:1.77")
     implementation(project(":uitaycompose"))
 }

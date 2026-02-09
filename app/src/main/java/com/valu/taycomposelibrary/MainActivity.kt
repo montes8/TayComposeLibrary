@@ -1,6 +1,7 @@
 package com.valu.taycomposelibrary
 
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
@@ -20,6 +21,10 @@ import androidx.compose.ui.unit.dp
 import com.valu.taycomposelibrary.ui.theme.TayComposeLibraryTheme
 import com.valu.uitaycompose.button.UiTayButton
 import com.valu.uitaycompose.loading.uiShowProgress
+import com.valu.uitaycompose.security.encryption.quantum.QuantumEngine
+import com.valu.uitaycompose.security.encryption.quantum.uiKeyPrivateQuantum
+import com.valu.uitaycompose.security.encryption.quantum.uiKeyPublicQuantum
+import com.valu.uitaycompose.security.encryption.uiCreateIv
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
@@ -29,9 +34,27 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
+        val message = "Este es un mensaje protegido contra computadoras cuánticas"
+        val keyPairBeto = QuantumEngine.uiCreateKeys()
+        val publicaBeto = keyPairBeto.uiKeyPublicQuantum()
+        val privadaBeto = keyPairBeto.uiKeyPrivateQuantum()
+        val iv = uiCreateIv(true)
+
+
+        val textEncrypt =  QuantumEngine.encrypt(
+            data = message,publicKey = publicaBeto,iv=  iv)
+
+        Log.d("tagquatum", textEncrypt.first)
+        Log.d("tagquatum", "\n")
+        val textDesencrypt =  QuantumEngine.decrypt(
+            data = message,privateKey = privadaBeto, packageKey = textEncrypt.second,iv=  iv)
+
+        Log.d("tagquatum", textDesencrypt)
+
         setContent {
             TayComposeLibraryTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { _ ->
+                Scaffold(modifier = Modifier.fillMaxSize()) { p ->
+                    print(p.toString())
                     Screençhome()
                 }
             }

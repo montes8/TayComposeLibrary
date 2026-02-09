@@ -43,5 +43,7 @@ dependencies {
     implementation("io.ktor:ktor-client-okhttp:3.1.1")
     implementation("io.ktor:ktor-client-cio:3.1.1")
     implementation("androidx.biometric:biometric:1.2.0-alpha05")
-    implementation("org.bouncycastle:bcprov-jdk18on:1.77") // Revisa la última versión
+    implementation("org.bouncycastle:bcprov-jdk18on:1.77")
+    // Librería de utilidades y PKIX (necesaria para manejar pares de llaves)
+    implementation("org.bouncycastle:bcpkix-jdk18on:1.77")
 }

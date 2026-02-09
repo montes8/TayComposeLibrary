@@ -16,14 +16,28 @@ import org.bouncycastle.pqc.crypto.crystals.kyber.KyberPrivateKeyParameters
 import org.bouncycastle.pqc.crypto.crystals.kyber.KyberPublicKeyParameters
 import java.security.SecureRandom
 
+
+fun AsymmetricCipherKeyPair.uiKeyPublicQuantum() :KyberPublicKeyParameters{
+  return this.public as  KyberPublicKeyParameters
+}
+
+fun AsymmetricCipherKeyPair.uiKeyPrivateQuantum() :KyberPrivateKeyParameters{
+    return this.private as  KyberPrivateKeyParameters
+}
+
+
+
 object QuantumEngine {
 
-    fun generateKeys(): AsymmetricCipherKeyPair {
+    fun uiCreateKeys(): AsymmetricCipherKeyPair {
         val keyGen = KyberKeyPairGenerator()
         // Kyber768 es el balance perfecto entre velocidad y seguridad
         keyGen.init(KyberKeyGenerationParameters(SecureRandom(), KyberParameters.kyber768))
         return keyGen.generateKeyPair()
     }
+
+
+
 
     // 2. ENCAPSULAR: Genera una llave secreta y su "paquete" cifrado
     // Se usa la Llave Pública del receptor
@@ -43,13 +57,35 @@ object QuantumEngine {
         return extractor.extractSecret(encapsulation)
     }
 
+
+    fun encrypt(data: String,publicKey:KyberPublicKeyParameters,iv : String): Pair<String,ByteArray>{
+        val (keyAES, packageKey) = encapsulate(publicKey)
+
+        return   Pair(AesGCM.encrypt(
+            data = data,
+            key = Base64.encodeToString(keyAES, Base64.NO_WRAP),
+            iv = iv,
+            type = TypeAes.GCM_256
+        ),packageKey)
+    }
+
+    fun decrypt(data: String,privateKey:KyberPrivateKeyParameters,packageKey : ByteArray,iv : String): String{
+        val keyRecovered = decapsulate(privateKey, packageKey)
+       return  AesGCM.decrypt(
+           dataBase64 = data,
+           key = Base64.encodeToString(keyRecovered, Base64.NO_WRAP),
+           iv = iv,
+           type = TypeAes.GCM_256
+       )
+
+    }
 }
 
 fun testQuantumEncryption() {
     // --- ESCENARIO: Ana quiere enviarle un mensaje a Beto ---
 
     // 1. Beto genera sus llaves y le manda la PÚBLICA a Ana
-    val keyPairBeto = QuantumEngine.generateKeys()
+    val keyPairBeto = QuantumEngine.uiCreateKeys()
     val publicaBeto = keyPairBeto.public as KyberPublicKeyParameters
     val privadaBeto = keyPairBeto.private as KyberPrivateKeyParameters
 
